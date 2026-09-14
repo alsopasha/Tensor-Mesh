@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: tensormesh
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.8"
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: MAX_CONNECTIONS
+        value: "8"
